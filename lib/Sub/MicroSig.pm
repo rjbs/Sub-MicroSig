@@ -46,11 +46,21 @@ our $VERSION = '0.01';
 =head1 DESCRIPTION
 
 This module allows you to give subroutine a signature using
-Params::Validate::Micro.
+L<Params::Validate::Micro>.
 
-=head1 FUNCTIONS
+=head1 USAGE
 
-=head2 wrap_sub_with_sig
+To provide a signature to a subroutine, provide the attribute C<:Sig()>,
+enclosing in the parentheses a valid L<Params::Validate::Micro> argument
+string.
+
+The routine will be wrapped so that its parameters are rewritten into the
+result of calling C<micro_validate> on its passed arguments.  If more than one
+argument is passed, or if the one passed argument is not an array or hash
+reference, an exception is thrown by Sub::MicroSig.
+
+The the given arguments cannot be validated according to the micro-argument
+string, Params::Validate throws an exception.
 
 =cut
 
@@ -106,6 +116,16 @@ Please report any bugs or feature requests to
 C<bug-sub-microsig@rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org>.  I will be notified, and then you'll automatically be
 notified of progress on your bug as I make changes.
+
+=head1 SEE ALSO
+
+=over
+
+=item * L<Params:Validate::Micro>
+
+=item * L<Params:Validate>
+
+=back
 
 =head1 COPYRIGHT
 
