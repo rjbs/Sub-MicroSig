@@ -30,7 +30,7 @@ our $VERSION = '0.01';
 
     use Sub::MicroSig;
 
-    sub pow :sig($x $pow; $trunc) {
+    sub pow :Sig($x $pow; $trunc) {
       my $arg = shift;
       my $value = $arg->{x} ** $arg->{pow};
 
