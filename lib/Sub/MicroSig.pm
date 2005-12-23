@@ -7,7 +7,6 @@ use base qw(Exporter);
 our @EXPORT = qw(MODIFY_CODE_ATTRIBUTES);
 
 use Carp ();
-use Data::Dump::Streamer;
 
 use Hook::LexWrap;
 use Params::Validate::Micro qw(micro_validate);
@@ -15,7 +14,7 @@ use Sub::Identify qw(sub_fullname);
 
 =head1 NAME
 
-Sub::MicroSig - The fantastic new Sub::MicroSig!
+Sub::MicroSig - microsigs for microvalidation of sub arguments
 
 =head1 VERSION
 
