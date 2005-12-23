@@ -76,7 +76,7 @@ sub MODIFY_CODE_ATTRIBUTES {
   return @leftovers;
 }
 
-sub pre_wrapper {
+sub _pre_wrapper {
   my ($signature) = @_;
   
   sub {
@@ -91,7 +91,7 @@ sub pre_wrapper {
 
 CHECK {
   for (@code_to_sig) {
-    my $wrapper = pre_wrapper($_->[1]);
+    my $wrapper = _pre_wrapper($_->[1]);
     wrap sub_fullname($_->[0]), pre => $wrapper;
   }
 }
