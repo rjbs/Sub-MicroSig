@@ -120,9 +120,9 @@ notified of progress on your bug as I make changes.
 
 =over
 
-=item * L<Params:Validate::Micro>
+=item * L<Params::Validate::Micro>
 
-=item * L<Params:Validate>
+=item * L<Params::Validate>
 
 =back
 
