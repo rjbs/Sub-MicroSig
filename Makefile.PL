@@ -7,6 +7,7 @@ WriteMakefile(
     AUTHOR              => 'Ricardo Signes <rjbs@cpan.org>',
     VERSION_FROM        => 'lib/Sub/MicroSig.pm',
     ABSTRACT_FROM       => 'lib/Sub/MicroSig.pm',
+    LICENSE             => 'perl',
     PL_FILES            => {},
     PREREQ_PM => {
         'Hook::LexWrap' => 0,
