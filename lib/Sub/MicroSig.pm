@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 use base qw(Exporter);
-our @EXPORT = qw(MODIFY_CODE_ATTRIBUTES);
+our @EXPORT = qw(MODIFY_CODE_ATTRIBUTES); ## no critic Export
 
 use Carp ();
 
@@ -18,13 +18,13 @@ Sub::MicroSig - microsigs for microvalidation of sub arguments
 
 =head1 VERSION
 
-version 0.03
+version 0.031
 
  $Id$
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.031';
 
 =head1 SYNOPSIS
 
@@ -109,7 +109,7 @@ sub _pre_wrapper {
       and not eval { $_[0]->can('can'); };
     Carp::croak "args to microsig'd $this must be a single array or hash ref"
       if @_ > ($arg_index+1)
-      or ! ref $_[$arg_index]
+      or not(ref $_[$arg_index])
       or ref $_[$arg_index] ne 'HASH' and ref $_[$arg_index] ne 'ARRAY';
     $_[$arg_index] = micro_validate($_[$arg_index], $signature);
   }
