@@ -1,0 +1,18 @@
+Sub-MicroSig
+
+This module allows you to give subroutine a signature using
+L<Params::Validate::Micro>.
+
+  use Sub::MicroSig;
+
+  sub pow :Sig($x $pow; $trunc) {
+    my $arg = shift;
+    my $value = $arg->{x} ** $arg->{pow};
+
+    $value = int $value if $arg->{trunc};
+  }
+  
+  ...
+
+  pow({ pow => 2, x => 4 }); # 64
+  pow([ 2, 0.5, 1 ]);        #  1 # int(sqrt(2))
