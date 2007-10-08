@@ -75,10 +75,10 @@ sub MODIFY_CODE_ATTRIBUTES {
   my @leftovers;
 
   while (my $attr = shift @attr) {
-    if ($attr =~ /\A Sig\(([^)]+)\) \z/x) {
+    if ($attr =~ /\A Sig\(([^)]*)\) \z/x) {
       $signature = $1;
       last;
-    } elsif ($attr =~ /\A Meth(?:od)?Sig\(([^)]+)\) \z/x) {
+    } elsif ($attr =~ /\A Meth(?:od)?Sig\(([^)]*)\) \z/x) {
       $signature = $1;
       $is_method = 1;
       last;
@@ -107,10 +107,18 @@ sub _pre_wrapper {
     Carp::croak "microsig'd method not called on a valid invocant"
       if $is_method
       and not eval { $_[0]->can('can'); };
-    Carp::croak "args to microsig'd $this must be a single array or hash ref"
-      if @_ > ($arg_index+1)
-      or not(ref $_[$arg_index])
-      or ref $_[$arg_index] ne 'HASH' and ref $_[$arg_index] ne 'ARRAY';
+
+    # In other words, only if an argument was given:
+    if ($#_ >= $arg_index) {
+#     warn "checking $_[$arg_index]\n";
+      Carp::croak "args to microsig'd $this must be a single array or hash ref"
+        if @_ > ($arg_index+1)
+        or not(ref $_[$arg_index])
+        or ref $_[$arg_index] ne 'HASH' and ref $_[$arg_index] ne 'ARRAY';
+#   } else {
+#     warn "checking ()\n";
+    }
+
     $_[$arg_index] = micro_validate($_[$arg_index], $signature);
   }
 }
