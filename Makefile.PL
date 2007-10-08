@@ -13,7 +13,7 @@ WriteMakefile(
         'Hook::LexWrap' => 0,
         'Sub::Identify' => 0,
         'Test::More'    => 0,
-        'Params::Validate::Micro' => 0.02,
+        'Params::Validate::Micro' => 0.031, # bug in positional validation
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Sub-MicroSig-* cover_db' },

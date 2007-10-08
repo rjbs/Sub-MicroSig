@@ -43,7 +43,7 @@ eval { main->method_with_params; };
 like($@, qr/parameter 'foo' missing/, "passing no arg fails: missing foo");
 
 eval { main->method_with_params([ ]); };
-like($@, qr/parameter 'foo' missing/, "passing [] fails: missing foo");
+like($@, qr/not enough arg/, "passing [] fails: missing foo");
 
 eval { main->method_with_params({ }); };
 like($@, qr/parameter 'foo' missing/, "passing {} fails: missing foo");
