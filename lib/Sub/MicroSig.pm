@@ -1,28 +1,17 @@
-package Sub::MicroSig;
-
-use warnings;
 use strict;
+use warnings;
+package Sub::MicroSig;
+# ABSTRACT: microsigs for microvalidation of sub arguments
 
+use Exporter 5.57 'import';
 use base qw(Exporter);
 our @EXPORT = qw(MODIFY_CODE_ATTRIBUTES); ## no critic Export
 
 use Carp ();
 
 use Hook::LexWrap;
-use Params::Validate::Micro qw(micro_validate);
+use Params::Validate::Micro 0.031 qw(micro_validate); # bugfixes
 use Sub::Identify qw(sub_fullname);
-
-=head1 NAME
-
-Sub::MicroSig - microsigs for microvalidation of sub arguments
-
-=head1 VERSION
-
-version 0.032
-
-=cut
-
-our $VERSION = '0.032';
 
 =head1 SYNOPSIS
 
@@ -34,7 +23,7 @@ our $VERSION = '0.032';
 
     $value = int $value if $arg->{trunc};
   }
-  
+
   ...
 
   pow({ pow => 2, x => 4 }); # 64
@@ -96,10 +85,10 @@ sub _pre_wrapper {
 
   my $arg_index = $is_method ? 1 : 0;
   my $this      = $is_method ? 'method' : 'sub';
-  
+
   sub {
     pop; # We're removing $magick so that it doesn't interfere with validation.
-    
+
     # in other words, if $_[0] can't support methods, you may not call a
     # microsig'd method on it. jeez!
     Carp::croak "microsig'd method not called on a valid invocant"
@@ -125,36 +114,16 @@ CHECK {
   }
 }
 
-=head1 AUTHOR
-
-Ricardo Signes, C<< <rjbs@cpan.org> >>
-
 =head2 THANKS
 
-Thanks, Hans Dieter Pearcey!  You wrote Params::Validate::Micro, and refrained
-from wincing when I suggested this would be a nice use of it.
-
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-sub-microsig@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.  I will be notified, and then you'll automatically be
-notified of progress on your bug as I make changes.
+Thanks, Hans Dieter Pearcey!  You wrote L<Params::Validate::Micro>, and
+refrained from wincing when I suggested this would be a nice use of it.
 
 =head1 SEE ALSO
 
-=over
-
-=item * L<Params::Validate::Micro>
-
-=item * L<Params::Validate>
-
-=back
-
-=head1 COPYRIGHT
-
-Copyright 2005-2006 Ricardo SIGNES.  This program is free software;  you can
-redistribute it and/or modify it under the same terms as Perl itself. 
+=for :list
+* L<Params::Validate::Micro>
+* L<Params::Validate>
 
 =cut
 
